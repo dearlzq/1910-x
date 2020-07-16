@@ -12,7 +12,7 @@ class TextController extends Controller
     public function hello()
     {
         $data = DB::table('p_goods')->first();// 查一条数据
-        var_dump($data);
+        print_r($data);
     }
 
     //登录
