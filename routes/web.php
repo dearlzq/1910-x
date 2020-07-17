@@ -14,6 +14,9 @@
 Route::get('/', function () {
     return view('welcome');
 });
+Route::get('/info', function () {
+    phpinfo();
+});
 //测试
 
 Route::get('/user/reg','User\IndexController@reg');     //用户注册
