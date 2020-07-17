@@ -15,28 +15,30 @@ Route::get('/', function () {
     return view('welcome');
 });
 //测试
-Route::get('text/hello','TextController@hello');   //lalalala
 
-
-
-
-
-
-Route::get('text/login','TextController@login');//登录
-Route::post('text/login','TextController@loginDo');//执行登录
-
-
-
-
-//商品
-Route::get('/goods/detail','Goods\GoodsController@detail');     //商品详情
-
-
-Route::get('/user/reg','User\IndexController@reg');                 //用户注册
-Route::post('/user/reg','User\IndexController@regDo');              //执行注册
+Route::get('/user/reg','User\IndexController@reg');     //用户注册
+Route::post('/user/reg','User\IndexController@regDo');  //执行注册
 Route::get('/user/login','User\IndexController@login');             //用户登录
 Route::post('/user/login','User\IndexController@loginDo');          //执行登录
-Route::get('/user/center','User\IndexController@center');           //个人中心
+Route::get('/user/centers','User\IndexController@centers');           //个人中心
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 //Api
 Route::post('/api/user/reg','Api\UserController@reg');          //执行注册

@@ -1,4 +1,1 @@
-用户中心<br>
-APPID：{{$_COOKIE['name']}}
-<hr>
-APPSECRET：{{$_COOKIE['names']}}
+<h1>欢迎来到用户中心</h1>

@@ -20,8 +20,6 @@ class IndexController extends Controller
         $user_email = request()->post("user_email");
         $password = request()->post("password");
         $repassword = request()->post("repassword");
-        $user_workname = request()->post("user_workname");
-        $user_work = request()->post("user_work");
         //密码长度
         $len = strlen($password);
         if($len<6) {
@@ -42,17 +40,10 @@ class IndexController extends Controller
         }
         //生成密码
         $pass = password_hash($password, PASSWORD_DEFAULT);
-        //添加
-        $user_appid = md5(time().time());
-        $user_secret = sha1($password);
         $data = [
             'user_name' => $user_name,
             'user_email' => $user_email,
             'password' => $pass,
-            'user_work' =>  $user_work,
-            'user_workname' => $user_workname,
-            'user_appid' => $user_appid,
-            'user_secret' => $user_secret,
             'reg_time' => time()
         ];
         $res = UserModel::insert($data);
@@ -76,9 +67,8 @@ class IndexController extends Controller
         if($pass) {
             //向客户端设置cookie
             setcookie('uid',$res->user_id,time()+3600,'/');
-            setcookie('name',$res->user_appid,time()+3600,'/');
-            setcookie('names',$res->user_secret,time()+3600,'/');
-            header('Refresh:2;url=/user/center');
+
+            header('Refresh:2;url=/user/centers');
             echo "登录成功";
         } else {
             header('Refresh:2;url=/user/login');
@@ -86,10 +76,10 @@ class IndexController extends Controller
         }
     }
     //个人中心
-    public function center()
+    public function centers()
     {
         //判断用户是否登录，是否有uid或name字段，
-        if(isset($_COOKIE['uid']) && isset($_COOKIE['name']) && isset($_COOKIE['names'])) {
+        if(isset($_COOKIE['uid'])) {
 
             return view('user.reg.center');
         } else {
