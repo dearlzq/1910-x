@@ -65,8 +65,8 @@ class IndexController extends Controller
         $res =  UserModel::where(['user_name' => $user_name])->first();
         $pass = password_verify($password,$res->password);
         if($pass) {
-            //向客户端设置cookie
-            setcookie('uid',$res->user_id,time()+3600,'/');
+            //cun存入session
+            session(['uid'=>$res->user_id]);
 
             header('Refresh:2;url=/user/centers');
             echo "登录成功";
@@ -79,8 +79,7 @@ class IndexController extends Controller
     public function centers()
     {
         //判断用户是否登录，是否有uid或name字段，
-        if(isset($_COOKIE['uid'])) {
-
+        if(session()->has('uid')) {
             return view('user.reg.center');
         } else {
 
